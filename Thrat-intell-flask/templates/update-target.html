@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block body %}
+<style>
+
+        .table-title {
+    color: #fff;
+    background: #E57373;
+    padding: 16px 25px;
+    margin: -20px -25px 10px;
+    border-radius: 3px 3px 0 0;
+    }
+
+</style>
+    <div class="container">
+
+    <form method="POST" >
+  <div class="form-row">
+
+    <div class="form-group col-md-6">
+      <label for="nome">Ticket Reference</label>
+      <input type="text" class="form-control" name="ticketId" id="ticketId" placeholder="Ticket Reference #22938" value="{{ Products.ticketId }}" >
+    </div>
+
+      <div class="form-group col-md-6">
+      <label for="telefone">Ticket Subject</label>
+      <input type="text" class="form-control" name="ticketTitle"  placeholder="Subject of the Ticket" value="{{ Products.ticketTitle }}" required>
+    </div>
+    </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="cpf">Requester</label>
+            <select class="form-control form-control-sm" name="ticketRequester" value="{{ Products.ticketRequester }}">
+
+                 <option {% if Products.ticketRequester== "Walid Kdous" %} selected="selected"{% endif %} >Walid Kdous</option>
+                 <option {% if Products.ticketRequester== "Mohamed Nasri" %} selected="selected"{% endif %} >Mohamed Nasri</option>
+                 <option {% if Products.ticketRequester== "chouaib hammami" %} selected="selected"{% endif %} >chouaib hammami</option>
+                 <option {% if Products.ticketRequester== "Iheb Ben Salem" %} selected="selected"{% endif %} >Iheb Ben Salem</option>
+
+
+            </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label >Status</label>
+                    <select class="form-control form-control-sm" name="ticketClosed" value="{{ Products.ticketClosed }}">
+                <option {% if Products.ticketClosed== "open" %} selected="selected"{% endif %} >Open</option>
+                <option {% if Products.ticketClosed== "Closed" %} selected="selected"{% endif %} >Closed</option>
+
+
+            </select>
+
+    </div>
+  </div>
+
+        <button class="btn btn-info btn-block" type="submit"><i class="fa fa-plus fa-fw"></i>ADD</button>
+
+</form>
+
+    </div>
+
+{% endblock %}

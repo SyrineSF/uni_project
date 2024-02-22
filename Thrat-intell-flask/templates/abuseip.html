@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+      <form method="POST" action="{{ url_for('addTarget') }}">
+<div class="input-group">
+  <input type="text" class="form-control" name="ip" placeholder="Add new ip to scan list">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i>ADD New IP</button>
+      </span>
+
+</div>
+<style type="text/css">
+     .search-box .input-group {
+    min-width: 150px;
+    position: absolute;
+    right: 0;
+
+  }
+  .search-box .input-group-addon, .search-box input {
+    border-color: #ddd;
+    border-radius: 0;
+  }
+    .search-box input {
+        height: 34px;
+        padding-right: 35px;
+        background: #f4fcfd;
+        border: none;
+        border-radius: 2px !important;
+    }
+  .search-box input:focus {
+        background: #fff;
+  }
+  .search-box input::placeholder {
+        font-style: italic;
+    }
+  .search-box .input-group-addon {
+        min-width: 35px;
+        border: none;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        z-index: 9;
+        padding: 6px 0;
+    }
+    .search-box i {
+        color: #a0a5b1;
+        font-size: 19px;
+        position: relative;
+        top: 2px;
+    }
+
+</style>
+</form>
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h2>{{rows}} <b>Imported IP</b></h2>
+                    </div>
+
+                    <div class="col-sm-7">
+           <div class="search-box">
+              <div class="input-group">
+                <input type="text" id="search" class="form-control" placeholder="Search by keywords">
+                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+              </div>
+            </div>
+                        <a href="#" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New IP</span></a>
+                        <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>IP abuse all IPs</span></a> 
+            </div>
+
+                </div>
+            </div>
+            <table class="table table-striped table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ipAddress</th>
+                        <th>Status</th> 
+                        <th>abuse Score</th> 
+                                     
+                        <th>country</th>
+                        <th>countryCode</th>
+                        <th>domain</th>
+            
+                        <th>lastReportedAt</th>
+                        <th>numDistinctUsers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     {% for target in results %}
+                    <tr>
+                        <td>{{ loop.index }}</td> 
+                        <td><a href="/greynoise/{{target[4]}}">{{ target[4] }}</a></td> 
+                        {% if target[0] >=60 %} 
+                        <td>
+            <button type="button" class="btn btn-danger btn-block">Malicious <span class="badge">{{ target[0] }}%</span></button>
+
+                        </td>
+                        {% else %}
+                <td><button type="button" class="btn btn-success btn-block  ">Clean <span class="badge">{{ target[0] }}%</span></button>
+                </td>   
+                    {% endif %}
+                        
+                        <td>{{ target[0] }}%</td>
+                        <td><img src="/static/flags/{{target[1] | lower }}.gif"></td>
+                        <td>{{target[1]}}</td>
+                        <td>{{ target[3] }}</td> 
+                        <td>{{ target[9] }}</td>   
+                        <td>{{ target[10] }}</td> 
+    
+                        
+              
+
+                    </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>     
+{% endblock %}

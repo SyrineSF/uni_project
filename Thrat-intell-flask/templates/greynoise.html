@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block body %}
+<style>
+
+    body{
+        background-color: #eeeeee;
+    }
+    
+</style>
+<div class="container d-flex justify-content-center">
+    
+    <h4 class="mt-4">Status of : {{ip}}</h4>
+    
+    
+    <p align="center">                                                                                                                                                                                          
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample2">CVE</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Tags</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample2">Metadata</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample2">Webpaths</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="false" aria-controls="multiCollapseExample2">webUserAgent</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample6" aria-expanded="false" aria-controls="multiCollapseExample2">PortScan</button>
+
+
+
+        <button class="btn btn-danger  " type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3 multiCollapseExample4 multiCollapseExample5 multiCollapseExample6">Show all results</button>
+      
+    
+    </p>
+      <div class="row table-wrapper" >
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+    
+                            <th>CVE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if cve is defined %}
+                        {% for i in cve %}
+                        <tr>       
+                            <td>{{i}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <div class="card card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+        
+                            <th>TAGS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if tags is defined %}
+                        {% for i in tags %}
+                        <tr>       
+                            <td>{{i}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+
+            
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample3">
+              <div class="card card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+            
+                            <th>metadata</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if metadata is defined %}
+                        {% for key, value in metadata.items() recursive %}
+                     <tr>
+                        <td>{{key}}</td>
+                        <td> {{value}}</td>
+                     </tr>
+                    
+                       
+                    {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>    
+
+        
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample4">
+              <div class="card card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+            
+                            <th>webpaths</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if webpaths is defined %}
+                        {% for i in webpaths %}
+                        <tr>       
+                            <td>{{i}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+                  
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample5">
+              <div class="card card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+            
+                            <th>webUserAgent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if webUserAgent is defined %}
+                        {% for i in webUserAgent %}
+                        <tr>       
+                            <td>{{i}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+          </div>
+
+
+                  
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample6">
+              <div class="card card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+            
+                            <th>PortScan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if portScan is defined %}
+                        {% for i in portScan %}
+                        <tr>       
+                            <td>{{i}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+      </div>
+</div>
+{% endblock %}

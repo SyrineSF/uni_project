@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+      <form method="POST" action="{{ url_for('addTarget') }}">
+<div class="input-group">
+  <input type="text" class="form-control" name="ip" placeholder="Add new ip to scan list">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-plus fa-fw"></i>ADD New IP</button>
+      </span>
+
+</div>
+<style type="text/css">
+     .search-box .input-group {
+    min-width: 150px;
+    position: absolute;
+    right: 0;
+
+  }
+  .search-box .input-group-addon, .search-box input {
+    border-color: #ddd;
+    border-radius: 0;
+  }
+    .search-box input {
+        height: 34px;
+        padding-right: 35px;
+        background: #f4fcfd;
+        border: none;
+        border-radius: 2px !important;
+    }
+  .search-box input:focus {
+        background: #fff;
+  }
+  .search-box input::placeholder {
+        font-style: italic;
+    }
+  .search-box .input-group-addon {
+        min-width: 35px;
+        border: none;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        z-index: 9;
+        padding: 6px 0;
+    }
+    .search-box i {
+        color: #a0a5b1;
+        font-size: 19px;
+        position: relative;
+        top: 2px;
+    }
+
+</style>
+</form>
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h2>{{rows}} <b>Imported IP</b></h2>
+                    </div>
+
+                    <div class="col-sm-7">
+           <div class="search-box">
+              <div class="input-group">
+                <input type="text" id="search" class="form-control" placeholder="Search by keywords">
+                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+              </div>
+            </div>
+                        <a href="#" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New IP</span></a>
+                        <a href="{{url_for('abuseIpScan')}}" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>IP abuse all IPs</span></a> 
+            </div>
+
+                </div>
+            </div>
+            <table class="table table-striped table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>IP</th>                       
+                        <th>Range</th>
+                        <th>Toolkit</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     {% for target in Targets %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{ target.ip }}</td>                        
+                        <td>
+                             {% if target.status == "Public" %}   
+            <button type="button" class="btn btn-info "> {{ target.status }} </button>
+
+
+            {% else %}
+            <button type="button" class="btn btn-danger"> {{ target.status }}</button>
+{% endif %}    
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm">IP Abuse</button>
+
+
+                        </td>
+                        <td>
+                            <a href="#" class="settings" title="Settings" data-toggle="tooltip">
+                                <i class="material-icons">&#xE254;</i></a>
+                        
+                            <a href="/deleteTarget/{{ target._id }}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        
+                        </td>
+
+                    </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>     
+{% endblock %}
